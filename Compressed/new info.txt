@@ -1,0 +1,77 @@
+NEW CALCS:
+1921492B = 1.83MB = 1876KB
+800x600/8 = 60000/colour
+1921492/60000 =~ 32
+approx 32bit
+so for test it should be 800x600x32
+
+1371.4 pieces so 1372
+	1400x1372
+
+test results 10 tries
+	1 frame   = 23ms
+	10 frames = 188ms
+	30 frames = 529ms
+	60 frames = 1066ms
+	120 frames = 2074ms
+
+800x600x32:
+
+	Bandwidth used:
+		800x600x32 = 15360000b = 1920000B = 1.83MB
+		1.83MB/frame:
+		at 10fps  = 18.3MB/s
+		at 30fps  = 54.9MB/s
+		at 60fps  = 109.8MB/s
+		at 120fps = 219.6MB/s
+
+my theorhetical speed
+1 frame:
+	1.83MB/23ms = 0.0796MB/ms = 79.6MB/s = 637Mb/s
+	higher internet speed connections exist currently, therefore the bottleneck is
+	in the protocol.
+10 frames:
+	18.3/188 = 0.0973MB/ms = 91.3MB/s = 779Mb/s
+30 frames:
+	54.9/529 = 0.104MB/ms = 104MB/s = 830Mb/s
+60 frames:
+	109.8/1066 = 0.103MB/ms = 103MB/s = 824Mb/s
+120 frames:
+	219.6/2074 = 0.106MB/ms = 106MB/s = 848Mb/s
+
+Plot[{1,23},{10,188},{30,529},{60,1066},{120,2074}]
+
+
+
+COMPRESSION:
+1.83MB:
+ZIP: 1.07MB lossless
+RAR: 1.01 - 736KB lossless
+RAR splits into 4096size packets, perfect
+736KB: 753,664bytes: which is normal speed:
+188packets
+1.01MB: 1,069,056bytes: fastest speed:
+261packets
+
+
+CHecksum:
+2bytes
+If it fails, drop FRAME
+
+Sequence number:
+8bits: 2^8 = 256> 188 > 2^7 = 128
+1 byte
+
+WITH COMPRESSION SENDING REAL FILE: NOT INCLUDING COMPRESSION OVERHEAD
+1frame:~70ms
+10frames:~690ms
+30frames:~2100ms
+60frames:~4100ms
+120frames:~8300ms
+
+Bandwidth:
+1 frame: .736/70 = 0.010514MB/ms = 10.5MB/s = 84.1Mb/s
+10 frames: 85.33Mb/s
+30 frames: 84.1Mb/s
+60 frames: 86.2Mb/s
+120 frames: 85.1Mb/s
